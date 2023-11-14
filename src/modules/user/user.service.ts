@@ -27,6 +27,14 @@ export class UserService {
     return user;
   }
 
+  async findByEmail(email: string) {
+    const user = await this.prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
+  }
+
   async create(userData: CreateUserDto) {
     const existingUser = await this.prisma.user.findUnique({
       where: { email: userData.email },
