@@ -6,6 +6,8 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from '../jwt/jwt.strategy';
 
+const providers = [AuthService, JwtStrategy];
+
 @Module({
   imports: [
     UserModule,
@@ -16,7 +18,7 @@ import { JwtStrategy } from '../jwt/jwt.strategy';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy],
+  providers: [...providers],
   exports: [JwtModule],
 })
 export class AuthModule {}
